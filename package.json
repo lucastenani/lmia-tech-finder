@@ -31,8 +31,11 @@
   },
   "name": "lmia-tech-finder",
   "scripts": {
+    "predev": "node scripts/generate-data-manifest.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/generate-data-manifest.mjs",
     "build": "tsc -b && vite build",
+    "manifest": "node scripts/generate-data-manifest.mjs",
     "lint": "biome lint .",
     "format": "biome format --write .",
     "typecheck": "tsc --noEmit",
