@@ -1,9 +1,8 @@
-import { Button } from "@/components/ui/button"
-
-export function App() {
+export default function App() {
   return (
-    <div className="flex min-h-svh p-6">
-      <Button className="mt-2">Button</Button>
-    </div>
+    <main className="min-h-screen bg-background p-8 text-foreground">
+      <h1 className="font-semibold text-2xl">LMIA Tech Finder</h1>
+      <p className="text-muted-foreground">Scaffold ready.</p>
+    </main>
   )
 }
