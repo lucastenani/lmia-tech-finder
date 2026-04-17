@@ -1,11 +1,16 @@
 import { CircleNotch } from "@phosphor-icons/react"
 import { columns } from "@/components/table/columns"
 import { LMIATable } from "@/components/table/lmia-table"
+import { Label } from "@/components/ui/label"
 import { Toaster } from "@/components/ui/sonner"
+import { Switch } from "@/components/ui/switch"
 import { useLMIAData } from "@/hooks/use-lmia-data"
+import { useTechFilter } from "@/hooks/use-tech-filter"
 
 export default function App() {
   const state = useLMIAData()
+  const records = state.status === "ready" ? state.data.records : []
+  const { enabled, setEnabled, filtered } = useTechFilter(records)
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -32,12 +37,25 @@ export default function App() {
 
         {state.status === "ready" && (
           <>
-            <div className="text-muted-foreground text-sm">
-              {state.data.records.length.toLocaleString()} records from{" "}
-              {state.data.sources.length} file
-              {state.data.sources.length === 1 ? "" : "s"}
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="text-muted-foreground text-sm">
+                {filtered.length.toLocaleString()} of{" "}
+                {records.length.toLocaleString()} records —{" "}
+                {state.data.sources.length} file
+                {state.data.sources.length === 1 ? "" : "s"}
+              </div>
+              <div className="flex items-center gap-2">
+                <Switch
+                  checked={enabled}
+                  id="tech-filter"
+                  onCheckedChange={setEnabled}
+                />
+                <Label className="cursor-pointer" htmlFor="tech-filter">
+                  Tech roles only
+                </Label>
+              </div>
             </div>
-            <LMIATable columns={columns} data={state.data.records} />
+            <LMIATable columns={columns} data={filtered} />
           </>
         )}
       </div>
