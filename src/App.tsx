@@ -103,12 +103,15 @@ export default function App() {
                   placeholder="Search employer, NOC, occupation…"
                   value={query}
                 />
-                <Select onValueChange={setProvince} value={province}>
+                <Select
+                  onValueChange={(v) => setProvince(v === "__all__" ? "" : v)}
+                  value={province || "__all__"}
+                >
                   <SelectTrigger className="w-52">
                     <SelectValue placeholder="All locations" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">All locations</SelectItem>
+                    <SelectItem value="__all__">All locations</SelectItem>
                     {provinces.map((p) => (
                       <SelectItem key={p} value={p}>
                         {p}
