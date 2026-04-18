@@ -8,22 +8,24 @@ The Canadian government publishes quarterly reports listing every employer grant
 
 ## Features
 
-- Loads the four 2025 quarterly POS reports (Q1–Q4) from `public/data/` at runtime using SheetJS, no backend required.
-- Unified, virtualized table over the combined dataset, with sorting and pagination.
-- Filters pre-configured for tech NOC codes (21xxx series: software engineers, developers, data scientists, systems specialists, etc.), plus filters by province, program stream and quarter.
-- Fuzzy employer search.
-- Per-row checkbox to mark employers already contacted. Applied state is persisted to `localStorage`.
-- Export the list of contacted employers as a Markdown file and import it back, so tracking state is portable between browsers or machines.
+- Loads quarterly XLSX files from `public/data/` at runtime using SheetJS, no backend required. New quarters are picked up automatically via a generated manifest.
+- Unified table over the combined dataset, with sorting and pagination.
+- Tech-only filter enabled by default — focuses on tech NOC codes (21xxx series: software engineers, developers, data scientists, systems specialists, etc.).
+- Group by employer toggle — collapses all records per company into a single row, summing total approved positions and aggregating NOC codes, occupation titles and program streams.
+- Fuzzy employer search, plus filters by province, program stream and quarter.
+- Per-row checkbox to mark employers as contacted (email and/or LinkedIn), with timestamps. Applied state is persisted to `localStorage`. Contacted rows are visually dimmed.
+- Export tracked employers as a Markdown file and import it back, so tracking state is portable between browsers or machines.
 - Quick link to LinkedIn company search for each row.
 
 ## Stack
 
-- Vite 7 + React 19 + TypeScript
+- Vite + React 19 + TypeScript
 - Tailwind CSS v4 + shadcn/ui + Radix UI
-- @tanstack/react-table + @tanstack/react-virtual
+- @tanstack/react-table for sorting, pagination and column management
 - SheetJS (`xlsx`) for parsing the quarterly reports
 - Zustand with persist middleware for applied-state storage
 - @phosphor-icons/react for icons
+- Sonner for toast notifications
 - Biome + Ultracite for lint and format
 
 ## Data source
@@ -37,19 +39,26 @@ npm install
 npm run dev
 ```
 
-Place the four XLSX files in `public/data/` as:
+Place XLSX files in `public/data/` following the naming convention `YYYY_Q[1-4].xlsx`, from newest to oldest:
 
 ```
-public/data/TFWP_2025_Q1_POS.xlsx
-public/data/TFWP_2025_Q2_POS.xlsx
-public/data/TFWP_2025_Q3_POS.xlsx
-public/data/TFWP_2025_Q4_POS.xlsx
+public/data/2026_Q1.xlsx
+public/data/2025_Q4.xlsx
+public/data/2025_Q3.xlsx
+...
+```
+
+The manifest is regenerated automatically before `dev` and `build`. To regenerate it manually:
+
+```bash
+npm run manifest
 ```
 
 ## Scripts
 
-- `npm run dev` — start Vite dev server
-- `npm run build` — type-check and build for production
+- `npm run dev` — regenerate manifest and start Vite dev server
+- `npm run build` — regenerate manifest, type-check and build for production
+- `npm run manifest` — scan `public/data/` and regenerate `manifest.json`
 - `npm run preview` — preview production build
 - `npm run typecheck` — run TypeScript without emitting
 - `npm run check` — Ultracite check
