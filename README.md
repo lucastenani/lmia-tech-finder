@@ -2,6 +2,9 @@
 
 A frontend-only React application to browse and filter Canadian employers who received a positive Labour Market Impact Assessment (LMIA) for technology positions, based on the quarterly Positive LMIA Employers List published by the Government of Canada (Temporary Foreign Worker Program).
 
+<img width="2528" height="1786" alt="vite-app" src="https://github.com/user-attachments/assets/652bef74-0c0d-4eca-8b15-19557aaa0334" />
+
+
 ## What it does
 
 The Canadian government publishes quarterly reports listing every employer granted a positive LMIA, along with the National Occupational Classification (NOC 2021) code of each approved position, the program stream, business location and number of positions. This app loads those reports and provides a focused workflow for software engineers looking for Canadian employers that actively sponsor foreign tech talent.
