@@ -41,10 +41,9 @@ export interface LoadResult {
   sources: DataSource[]
 }
 
-export type ApplicationState = Record<string, { emailedAt: string }>
-
 export type EmployerGroup = {
   id: string
+  recordIds: string[]
   employer: string
   city: string
   province: string

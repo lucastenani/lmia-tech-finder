@@ -16,6 +16,7 @@ export function groupByEmployer(records: LMIARecord[]): EmployerGroup[] {
     const existing = groups.get(key)
 
     if (existing) {
+      existing.recordIds.push(r.id)
       if (!existing.nocCodes.includes(r.nocCode)) {
         existing.nocCodes.push(r.nocCode)
         existing.occupationTitles.push(r.occupationTitle)
@@ -28,6 +29,7 @@ export function groupByEmployer(records: LMIARecord[]): EmployerGroup[] {
     } else {
       groups.set(key, {
         id: hash(key),
+        recordIds: [r.id],
         employer: r.employer,
         city: r.city,
         province: r.province,

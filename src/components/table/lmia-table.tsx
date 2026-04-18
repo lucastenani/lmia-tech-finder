@@ -22,9 +22,14 @@ import {
 interface Props<TData> {
   columns: ColumnDef<TData>[]
   data: TData[]
+  getRowClassName?: (row: TData) => string | undefined
 }
 
-export function LMIATable<TData>({ columns, data }: Props<TData>) {
+export function LMIATable<TData>({
+  columns,
+  data,
+  getRowClassName,
+}: Props<TData>) {
   const [sorting, setSorting] = useState<SortingState>([])
 
   const table = useReactTable({
@@ -75,7 +80,10 @@ export function LMIATable<TData>({ columns, data }: Props<TData>) {
               </TableRow>
             ) : (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow
+                  className={getRowClassName?.(row.original)}
+                  key={row.id}
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(
