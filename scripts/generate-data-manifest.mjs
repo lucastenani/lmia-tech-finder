@@ -23,7 +23,7 @@ async function main() {
       }
     })
     .filter(Boolean)
-    .sort((a, b) => a.year - b.year || a.quarter - b.quarter)
+    .sort((a, b) => b.year - a.year || b.quarter - a.quarter)
 
   await writeFile(MANIFEST_PATH, `${JSON.stringify({ files }, null, 2)}\n`)
   console.log(`[manifest] wrote ${files.length} entries to ${MANIFEST_PATH}`)
