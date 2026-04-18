@@ -1,4 +1,4 @@
-# LMIA Tech Finder
+# 🇨🇦 LMIA Tech Finder 🇨🇦
 
 A frontend-only React application to browse and filter Canadian employers who received a positive Labour Market Impact Assessment (LMIA) for technology positions, based on the quarterly Positive LMIA Employers List published by the Government of Canada (Temporary Foreign Worker Program).
 
