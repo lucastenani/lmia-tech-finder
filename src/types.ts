@@ -42,3 +42,18 @@ export interface LoadResult {
 }
 
 export type ApplicationState = Record<string, { emailedAt: string }>
+
+export type EmployerGroup = {
+  id: string
+  employer: string
+  city: string
+  province: string
+  provinceCode: string
+  nocCodes: string[]
+  occupationTitles: string[]
+  programStreams: string[]
+  periods: string[]
+  totalPositions: number
+  totalLmias: number
+  recordCount: number
+}
