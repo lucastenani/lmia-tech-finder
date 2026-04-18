@@ -27,8 +27,15 @@ export function useLocationFilter(
   const [province, setProvince] = useState(() => readLocationFromUrl())
 
   const provinces = useMemo(() => {
-    const set = new Set(allRecords.map((r) => r.province))
-    return Array.from(set).sort()
+    const map = new Map<string, string>()
+    for (const r of allRecords) {
+      if (r.province && !map.has(r.province)) {
+        map.set(r.province, r.provinceCode)
+      }
+    }
+    return Array.from(map.entries())
+      .map(([name, code]) => ({ name, code }))
+      .sort((a, b) => a.name.localeCompare(b.name))
   }, [allRecords])
 
   const filtered = useMemo(() => {

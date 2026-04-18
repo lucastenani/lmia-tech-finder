@@ -112,9 +112,9 @@ export default function App() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="__all__">All locations</SelectItem>
-                    {provinces.map((p) => (
-                      <SelectItem key={p} value={p}>
-                        {p}
+                    {provinces.map(({ name, code }) => (
+                      <SelectItem key={name} value={name}>
+                        {code ? `${code} — ${name}` : name}
                       </SelectItem>
                     ))}
                   </SelectContent>
