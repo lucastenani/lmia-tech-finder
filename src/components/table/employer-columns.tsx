@@ -1,30 +1,8 @@
 import { EnvelopeSimple, LinkedinLogo } from "@phosphor-icons/react"
 import type { ColumnDef } from "@tanstack/react-table"
+import { ContactCheckbox } from "@/components/table/contact-checkbox"
 import { Badge } from "@/components/ui/badge"
-import { useAppliedStore } from "@/store/applied-store"
 import type { EmployerGroup } from "@/types"
-
-function EmailedCell({ recordIds }: { recordIds: string[] }) {
-  const count = useAppliedStore((s) =>
-    recordIds.reduce((n, id) => n + (s.applied[id]?.emailedAt ? 1 : 0), 0)
-  )
-  return (
-    <span className="text-muted-foreground tabular-nums">
-      {count}/{recordIds.length}
-    </span>
-  )
-}
-
-function LinkedInCell({ recordIds }: { recordIds: string[] }) {
-  const count = useAppliedStore((s) =>
-    recordIds.reduce((n, id) => n + (s.applied[id]?.linkedInAt ? 1 : 0), 0)
-  )
-  return (
-    <span className="text-muted-foreground tabular-nums">
-      {count}/{recordIds.length}
-    </span>
-  )
-}
 
 export const employerColumns: ColumnDef<EmployerGroup>[] = [
   {
@@ -73,7 +51,7 @@ export const employerColumns: ColumnDef<EmployerGroup>[] = [
       </div>
     ),
     accessorFn: () => 0,
-    cell: ({ row }) => <EmailedCell recordIds={row.original.recordIds} />,
+    cell: ({ row }) => <ContactCheckbox channel="email" id={row.original.id} />,
   },
   {
     id: "linkedin",
@@ -84,7 +62,9 @@ export const employerColumns: ColumnDef<EmployerGroup>[] = [
       </div>
     ),
     accessorFn: () => 0,
-    cell: ({ row }) => <LinkedInCell recordIds={row.original.recordIds} />,
+    cell: ({ row }) => (
+      <ContactCheckbox channel="linkedin" id={row.original.id} />
+    ),
   },
   {
     accessorKey: "totalPositions",

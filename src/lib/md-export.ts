@@ -1,3 +1,4 @@
+import { getEmployerKey } from "@/lib/group-employers"
 import type { ContactEntry } from "@/store/applied-store"
 import type { LMIARecord } from "@/types"
 
@@ -29,9 +30,11 @@ export function exportToMarkdown(
   applied: Record<string, ContactEntry>,
   records: LMIARecord[]
 ): string {
-  const recordById = new Map(records.map((r) => [r.id, r]))
+  const recordByEmployerKey = new Map(
+    records.map((r) => [getEmployerKey(r.employer, r.city), r])
+  )
   const rows = Object.entries(applied)
-    .map(([id, entry]) => ({ id, entry, record: recordById.get(id) }))
+    .map(([id, entry]) => ({ id, entry, record: recordByEmployerKey.get(id) }))
     .filter(
       (x): x is { id: string; entry: ContactEntry; record: LMIARecord } =>
         !!x.record

@@ -7,6 +7,10 @@ function pushUnique(arr: string[], value: string): void {
   }
 }
 
+export function getEmployerKey(employer: string, city: string): string {
+  return hash(`${employer.toLowerCase().trim()}|${city.toLowerCase().trim()}`)
+}
+
 export function groupByEmployer(records: LMIARecord[]): EmployerGroup[] {
   const groups = new Map<string, EmployerGroup>()
 

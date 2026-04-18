@@ -3,18 +3,18 @@ import { persist } from "zustand/middleware"
 
 export type ContactChannel = "email" | "linkedin"
 
-export type ContactEntry = {
+export interface ContactEntry {
   emailedAt?: string
   linkedInAt?: string
 }
 
-type AppliedState = {
+interface AppliedState {
   applied: Record<string, ContactEntry>
-  toggle: (id: string, channel: ContactChannel) => void
-  mark: (id: string, channel: ContactChannel, timestamp?: string) => void
-  unmark: (id: string, channel: ContactChannel) => void
   clear: () => void
   importBulk: (entries: Record<string, ContactEntry>) => void
+  mark: (id: string, channel: ContactChannel, timestamp?: string) => void
+  toggle: (id: string, channel: ContactChannel) => void
+  unmark: (id: string, channel: ContactChannel) => void
 }
 
 const CHANNEL_FIELD = {
