@@ -1,6 +1,24 @@
 {
   "files": [
     {
+      "filename": "2025_Q4.xlsx",
+      "path": "/data/2025_Q4.xlsx",
+      "year": 2025,
+      "quarter": 4
+    },
+    {
+      "filename": "2025_Q3.xlsx",
+      "path": "/data/2025_Q3.xlsx",
+      "year": 2025,
+      "quarter": 3
+    },
+    {
+      "filename": "2025_Q2.xlsx",
+      "path": "/data/2025_Q2.xlsx",
+      "year": 2025,
+      "quarter": 2
+    },
+    {
       "filename": "2025_Q1.xlsx",
       "path": "/data/2025_Q1.xlsx",
       "year": 2025,
