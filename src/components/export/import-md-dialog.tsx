@@ -77,7 +77,7 @@ export function ImportMdDialog() {
           Import
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle>Import applied companies</DialogTitle>
           <DialogDescription>

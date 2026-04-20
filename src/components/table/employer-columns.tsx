@@ -1,10 +1,18 @@
 import { EnvelopeSimple, LinkedinLogo } from "@phosphor-icons/react"
 import type { ColumnDef } from "@tanstack/react-table"
 import { ContactCheckbox } from "@/components/table/contact-checkbox"
+import { RowActions } from "@/components/table/row-actions"
 import { Badge } from "@/components/ui/badge"
 import type { EmployerGroup } from "@/types"
 
 export const employerColumns: ColumnDef<EmployerGroup>[] = [
+  {
+    id: "actions",
+    header: "",
+    size: 36,
+    enableSorting: false,
+    cell: ({ row }) => <RowActions record={row.original} />,
+  },
   {
     accessorKey: "employer",
     header: "Employer",

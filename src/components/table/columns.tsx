@@ -1,6 +1,7 @@
 import { EnvelopeSimple, LinkedinLogo } from "@phosphor-icons/react"
 import type { ColumnDef } from "@tanstack/react-table"
 import { ContactCheckbox } from "@/components/table/contact-checkbox"
+import { RowActions } from "@/components/table/row-actions"
 import { getEmployerKey } from "@/lib/group-employers"
 import type { LMIARecord } from "@/types"
 
@@ -28,6 +29,13 @@ export const columns: ColumnDef<LMIARecord>[] = [
         id={getEmployerKey(row.original.employer, row.original.city)}
       />
     ),
+  },
+  {
+    id: "actions",
+    header: "",
+    size: 36,
+    enableSorting: false,
+    cell: ({ row }) => <RowActions record={row.original} />,
   },
   {
     id: "period",
